@@ -8,13 +8,35 @@
 
 import SwiftUI
 
-// See MDCShadowMetrics in
-//https://github.com/material-components/material-components-ios/blob/develop/components/ShadowLayer/src/MDCShadowLayer.m
-public struct Elevation: ViewModifier {
+struct Elevation: ViewModifier {
+    //https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/material/constants.dart#L31
+    let kThemeChangeDuration: Double = 0.2
+
+    // See MDCShadowMetrics in
+    //https://github.com/material-components/material-components-ios/blob/develop/components/ShadowLayer/src/MDCShadowLayer.m
     let kKeyShadowOpacity: Double = 0.26
     let kAmbientShadowOpacity: Double = 0.08
 
-    let elevation: CGFloat
+    let enabled: CGFloat
+    let disabled: CGFloat
+
+    // The following only apply when enabled:
+    let hover: CGFloat
+    let mouseDown: CGFloat
+
+    @Environment(\.isEnabled) var isEnabled: Bool
+    @State var pointerState: PointerState = .none
+
+    var elevation: CGFloat {
+        if !isEnabled {
+            return disabled
+        }
+        switch pointerState {
+        case .none: return enabled
+        case .hover: return hover
+        case .down(_): return mouseDown
+        }
+    }
 
     var ambientShadowBlur: CGFloat {
         elevation <= 0 ? 0 : 0.889544 * elevation - 0.003701
@@ -28,11 +50,6 @@ public struct Elevation: ViewModifier {
         elevation <= 0 ? 0 : 1.23118 * elevation - 0.03933
     }
 
-    public init(_ elevation: CGFloat)
-    {
-        self.elevation = elevation
-    }
-
     public func body(content: Content) -> some View
     {
         content
@@ -41,13 +58,22 @@ public struct Elevation: ViewModifier {
 
             // key shadow
             .shadow(color: Color.primary.opacity(kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
+
+            // FIXME: Is linear the correct curve?
+            .animation(.linear(duration: kThemeChangeDuration))
+            .modifier(PointerObserver(updating: $pointerState))
     }
 }
 
 extension View {
-    @inlinable public func elevation(_ elevation: CGFloat) -> some View
+    public func elevation(_ elevation: CGFloat) -> some View
     {
-        ModifiedContent(content: self, modifier: Elevation(elevation))
+        ModifiedContent(content: self, modifier: Elevation(enabled: elevation, disabled: elevation, hover: elevation, mouseDown: elevation))
+    }
+
+    public func elevation(enabled: CGFloat, hover: CGFloat, mouseDown: CGFloat, disabled: CGFloat = 0) -> some View
+    {
+        ModifiedContent(content: self, modifier: Elevation(enabled: enabled, disabled: disabled, hover: hover, mouseDown: mouseDown))
     }
 }
 
@@ -56,7 +82,7 @@ struct Elevation_Previews: PreviewProvider {
     static var previews: some View {
         Color.red
             .frame(width: 30, height: 20)
-            .modifier(Elevation(2))
+            .elevation(2)
     }
 }
 #endif

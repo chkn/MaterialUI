@@ -25,22 +25,32 @@ struct MaterialButtonContent: ViewModifier {
 }
 
 public struct ContainedButtonStyle: ButtonStyle {
+    public init()
+    {
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View
     {
         configuration.label
             .modifier(MaterialButtonContent())
-            .foregroundColor(Color.white) // FIXME
+            .modifier(Ripple(color: Color.white, cornerRadius: 4)) // FIXME: should be foregroundColor
+            .foregroundColor(Color.white) // FIXME: should be foregroundColor
             .background(Color.accentColor)
             .cornerRadius(4)
-            .elevation(2)
+            .elevation(enabled: 2, hover: 4, mouseDown: 8)
     }
 }
 
 public struct OutlinedButtonStyle: ButtonStyle {
+    public init()
+    {
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View
     {
         configuration.label
             .modifier(MaterialButtonContent())
+            .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
             .foregroundColor(Color.accentColor)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
@@ -50,10 +60,15 @@ public struct OutlinedButtonStyle: ButtonStyle {
 }
 
 public struct TextButtonStyle: ButtonStyle {
+    public init()
+    {
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View
     {
         configuration.label
             .modifier(MaterialButtonContent(xPadding: 8))
+            .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
             .foregroundColor(Color.accentColor)
     }
 }
