@@ -12,6 +12,8 @@
 		FA2159732354141F00ACA9E8 /* Ripple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FB5B62352872100740693 /* Ripple.swift */; };
 		FA2159742354142100ACA9E8 /* Elevation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FB5B423527BB900740693 /* Elevation.swift */; };
 		FA2159762354142800ACA9E8 /* MaterialUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA6FB5AA23526CDF00740693 /* MaterialUI.h */; };
+		FA27B3F72356CC6D004A096E /* BindingRefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA27B3F62356CC6D004A096E /* BindingRefCell.swift */; };
+		FA27B3F82356CC6D004A096E /* BindingRefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA27B3F62356CC6D004A096E /* BindingRefCell.swift */; };
 		FA6FB5AC23526CDF00740693 /* MaterialUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA6FB5AA23526CDF00740693 /* MaterialUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA6FB5B323526CF900740693 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FB5B223526CF900740693 /* Button.swift */; };
 		FA6FB5B523527BBA00740693 /* Elevation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FB5B423527BB900740693 /* Elevation.swift */; };
@@ -34,6 +36,7 @@
 		FA1875DD23556B6B00CCFA2A /* PointerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerState.swift; sourceTree = "<group>"; };
 		FA21596B2354141300ACA9E8 /* MaterialUI_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaterialUI_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA21596E2354141300ACA9E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA27B3F62356CC6D004A096E /* BindingRefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingRefCell.swift; sourceTree = "<group>"; };
 		FA6FB5A723526CDF00740693 /* MaterialUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaterialUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6FB5AA23526CDF00740693 /* MaterialUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaterialUI.h; sourceTree = "<group>"; };
 		FA6FB5AB23526CDF00740693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 				FA6FB5B423527BB900740693 /* Elevation.swift */,
 				FA6FB5B62352872100740693 /* Ripple.swift */,
 				FA1875DD23556B6B00CCFA2A /* PointerState.swift */,
+				FA27B3F62356CC6D004A096E /* BindingRefCell.swift */,
 			);
 			path = MaterialUI;
 			sourceTree = "<group>";
@@ -245,6 +249,7 @@
 				FA1875DF23556B6B00CCFA2A /* PointerState.swift in Sources */,
 				FA2159742354142100ACA9E8 /* Elevation.swift in Sources */,
 				FA8333B4235574EC004D946E /* Button.swift in Sources */,
+				FA27B3F82356CC6D004A096E /* BindingRefCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +261,7 @@
 				FA1875DE23556B6B00CCFA2A /* PointerState.swift in Sources */,
 				FA6FB5B323526CF900740693 /* Button.swift in Sources */,
 				FA6FB5B523527BBA00740693 /* Elevation.swift in Sources */,
+				FA27B3F72356CC6D004A096E /* BindingRefCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

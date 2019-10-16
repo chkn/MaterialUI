@@ -23,10 +23,18 @@ enum PointerState {
 
 struct PointerObserver: ViewModifier {
     @Binding var state: PointerState
+    let action: (() -> Void)?
 
-    public init(updating: Binding<PointerState>)
+    public init(updating: Binding<PointerState>, action: (() -> Void)? = nil)
     {
         self._state = updating
+        self.action = action
+    }
+
+    public init(action: @escaping () -> Void)
+    {
+        self._state = BindingRefCell(initialValue: .none).binding
+        self.action = action
     }
 
     public func body(content: Content) -> some View
@@ -45,6 +53,9 @@ struct PointerObserver: ViewModifier {
                     #else
                         self.state = .none
                     #endif
+                    if let fn = self.action {
+                        fn()
+                    }
                 }
             }
         #if HAVE_HOVER

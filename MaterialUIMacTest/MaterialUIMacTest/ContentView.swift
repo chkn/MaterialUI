@@ -13,13 +13,13 @@ import MaterialUI_Mac
 struct ContentView: View {
     var body: some View {
         VStack(spacing: 10) {
-            Button("Contained Button", action: {})
+            Button("Contained Button", action: { print("Contained") })
                 .buttonStyle(ContainedButtonStyle())
-            
-            Button("Outlined Button", action: {})
+
+            Button("Outlined Button", action: { print("Outlined") })
                 .buttonStyle(OutlinedButtonStyle())
 
-            Button("Text Button", action: {})
+            Button("Text Button", action: { print("Text") })
                 .buttonStyle(TextButtonStyle())
         }
     }

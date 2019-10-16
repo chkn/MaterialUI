@@ -24,31 +24,34 @@ struct MaterialButtonContent: ViewModifier {
     }
 }
 
-public struct ContainedButtonStyle: ButtonStyle {
+public struct ContainedButtonStyle: PrimitiveButtonStyle {
     public init()
     {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View
     {
-        configuration.label
+        configuration
+            .label
             .modifier(MaterialButtonContent())
             .modifier(Ripple(color: Color.white, cornerRadius: 4)) // FIXME: should be foregroundColor
             .foregroundColor(Color.white) // FIXME: should be foregroundColor
             .background(Color.accentColor)
             .cornerRadius(4)
             .elevation(enabled: 2, hover: 4, mouseDown: 8)
+            .modifier(PointerObserver(action: configuration.trigger))
     }
 }
 
-public struct OutlinedButtonStyle: ButtonStyle {
+public struct OutlinedButtonStyle: PrimitiveButtonStyle {
     public init()
     {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View
     {
-        configuration.label
+        configuration
+            .label
             .modifier(MaterialButtonContent())
             .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
             .foregroundColor(Color.accentColor)
@@ -56,20 +59,23 @@ public struct OutlinedButtonStyle: ButtonStyle {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(Color.accentColor)
             )
+            .modifier(PointerObserver(action: configuration.trigger))
     }
 }
 
-public struct TextButtonStyle: ButtonStyle {
+public struct TextButtonStyle: PrimitiveButtonStyle {
     public init()
     {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View
     {
-        configuration.label
+        configuration
+            .label
             .modifier(MaterialButtonContent(xPadding: 8))
             .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
             .foregroundColor(Color.accentColor)
+            .modifier(PointerObserver(action: configuration.trigger))
     }
 }
 
