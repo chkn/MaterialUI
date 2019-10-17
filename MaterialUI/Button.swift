@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// Note that we wrap most stuff in a ViewModifier because @Environment doesn't work in (Primitive)ButtonStyle.
+
 /// A `ViewModifier` that applies to all Material buttons.
 struct MaterialButtonContent: ViewModifier {
     var xPadding: CGFloat = 16
@@ -25,6 +27,21 @@ struct MaterialButtonContent: ViewModifier {
 }
 
 public struct ContainedButtonStyle: PrimitiveButtonStyle {
+    private struct LabelModifier: ViewModifier {
+        @Environment(\.isEnabled) var isEnabled: Bool
+
+        func body(content: Content) -> some View
+        {
+            content
+                .modifier(MaterialButtonContent())
+                .rippleEffect(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
+                .foregroundColor(Color.white) // FIXME: should be foregroundColor
+                .background(isEnabled ? Color.accentColor : Color.gray)
+                .cornerRadius(4)
+                .elevation(enabled: 2, hover: 4, mouseDown: 8)
+        }
+    }
+
     public init()
     {
     }
@@ -33,17 +50,28 @@ public struct ContainedButtonStyle: PrimitiveButtonStyle {
     {
         configuration
             .label
-            .modifier(MaterialButtonContent())
-            .modifier(Ripple(color: Color.white, cornerRadius: 4)) // FIXME: should be foregroundColor
-            .foregroundColor(Color.white) // FIXME: should be foregroundColor
-            .background(Color.accentColor)
-            .cornerRadius(4)
-            .elevation(enabled: 2, hover: 4, mouseDown: 8)
+            .modifier(LabelModifier())
             .modifier(PointerObserver(action: configuration.trigger))
     }
 }
 
 public struct OutlinedButtonStyle: PrimitiveButtonStyle {
+    private struct LabelModifier: ViewModifier {
+        @Environment(\.isEnabled) var isEnabled: Bool
+
+        func body(content: Content) -> some View
+        {
+            content
+                .modifier(MaterialButtonContent())
+                .rippleEffect(Color.accentColor, cornerRadius: 4)
+                .foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(isEnabled ? Color.accentColor : Color.gray)
+                )
+        }
+    }
+
     public init()
     {
     }
@@ -52,18 +80,24 @@ public struct OutlinedButtonStyle: PrimitiveButtonStyle {
     {
         configuration
             .label
-            .modifier(MaterialButtonContent())
-            .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
-            .foregroundColor(Color.accentColor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color.accentColor)
-            )
+            .modifier(LabelModifier())
             .modifier(PointerObserver(action: configuration.trigger))
     }
 }
 
 public struct TextButtonStyle: PrimitiveButtonStyle {
+    private struct LabelModifier: ViewModifier {
+        @Environment(\.isEnabled) var isEnabled: Bool
+
+        func body(content: Content) -> some View
+        {
+            content
+                .modifier(MaterialButtonContent(xPadding: 8))
+                .rippleEffect(Color.accentColor, cornerRadius: 4)
+                .foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+        }
+    }
+
     public init()
     {
     }
@@ -72,9 +106,7 @@ public struct TextButtonStyle: PrimitiveButtonStyle {
     {
         configuration
             .label
-            .modifier(MaterialButtonContent(xPadding: 8))
-            .modifier(Ripple(color: Color.accentColor, cornerRadius: 4))
-            .foregroundColor(Color.accentColor)
+            .modifier(LabelModifier())
             .modifier(PointerObserver(action: configuration.trigger))
     }
 }

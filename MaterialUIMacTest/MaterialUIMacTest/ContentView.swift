@@ -11,16 +11,23 @@ import SwiftUI
 import MaterialUI_Mac
 
 struct ContentView: View {
+    @State var disabled: Bool = false
+    
     var body: some View {
         VStack(spacing: 10) {
             Button("Contained Button", action: { print("Contained") })
                 .buttonStyle(ContainedButtonStyle())
+                .disabled(disabled)
 
             Button("Outlined Button", action: { print("Outlined") })
                 .buttonStyle(OutlinedButtonStyle())
+                .disabled(disabled)
 
             Button("Text Button", action: { print("Text") })
                 .buttonStyle(TextButtonStyle())
+                .disabled(disabled)
+            
+            Button("Enable/Disable", action: { self.disabled.toggle() })
         }
     }
 }
