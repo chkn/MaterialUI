@@ -26,7 +26,7 @@ struct ContentView: View {
             Button("Text Button", action: { print("Text") })
                 .buttonStyle(TextButtonStyle())
                 .disabled(disabled)
-            
+
             Button("Enable/Disable", action: { self.disabled.toggle() })
         }
     }
