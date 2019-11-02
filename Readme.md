@@ -1,5 +1,7 @@
 # MaterialUI
 
+[![Build Status](https://app.bitrise.io/app/a896373cca47856f/status.svg?token=CLTZ5UjbuccwXJnDEmygcA&branch=master)](https://app.bitrise.io/app/a896373cca47856f)
+
 [Material design](https://material.io) components for SwiftUI. 
 
 - [Using MaterialUI](#using-materialui)
