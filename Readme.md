@@ -2,18 +2,31 @@
 
 [Material design](https://material.io) components for SwiftUI. 
 
-## Work in Progress
+- [Using MaterialUI](#using-materialui)
+- [Hacking on MaterialUI](#hacking-on-materialui)
 
-This project is in the very early stages, and some stuff will probably change. For instance, we ultimately intend to build and ship via the Swift Package Manager, but for now, we are building Xcode framework targets to facilitate development with SwiftUI previews.
+## Supported Platforms
 
-Help is always welcome!
+- macOS 10.15+
+- iOS 13+
+- watchOS 6+
+- ~~tvOS 13+~~ (see issue [#1](https://github.com/chkn/MaterialUI/issues/1))
 
-## Components
+## Using MaterialUI
+
+Before we begin, note that this project is in the very early stages, and some stuff will probably change. Please feel free to file Issues and Pull Requests.
+
+1. From within your app project in Xcode 11 or newer, choose File -> Swift Packages -> Add Package Dependency
+2. Paste the URL of this GitHub repository
+3. Click through the remaining steps, choosing which version of MaterialUI you want to track and which targets to add it to
+4. See the next section to start styling your views!
+
+### Components
 
 - [Buttons](#buttons)
 - [Modifiers](#modifiers)
 
-### Buttons
+#### Buttons
 
 There are 3 styles of [material buttons](https://material.io/components/buttons):
 
@@ -23,7 +36,7 @@ There are 3 styles of [material buttons](https://material.io/components/buttons)
 
 The button style is selected with the `buttonStyle` modifier, which may be used on any view to specify the style used for all buttons in that subview hierarchy.
 
-#### Contained
+##### Contained
 
 ```swift
 Button("Contained Button", action: {})
@@ -32,7 +45,7 @@ Button("Contained Button", action: {})
 
 ![Contained Button](docs/img/ContainedButton.gif)
 
-#### Outlined
+##### Outlined
 
 ```swift
 Button("Outlined Button", action: {})
@@ -41,7 +54,7 @@ Button("Outlined Button", action: {})
 
 ![Outlined Button](docs/img/OutlinedButton.gif)
 
-#### Text
+##### Text
 
 ```swift
 Button("Text Button", action: {})
@@ -50,7 +63,7 @@ Button("Text Button", action: {})
 
 ![Text Button](docs/img/TextButton.gif)
 
-### Modifiers
+#### Modifiers
 
 MaterialUI also supplies some modifiers you can apply to any SwiftUI View:
 
@@ -58,3 +71,18 @@ MaterialUI also supplies some modifiers you can apply to any SwiftUI View:
 - rippleEffect
 
 TODO: Document these.
+
+## Hacking on MaterialUI
+
+To build MaterialUI, simply run `swift build`.
+
+If you are on Mac and prefer to hack in Xcode, you can generate an Xcode project with `swift package generate-xcodeproj`.
+
+### Platform Defines
+
+To deal with cases where the SwiftUI implementation varies by platform, the following can be defined at build time to indicate what APIs are available:
+
+- `HAVE_HOVER` - Enables handling of hover events using the `onHover` modifier.
+- `HAVE_DRAG` - Enables handling of mouse down location using `DragGesture`.
+
+See `Package.swift` for the configurations where these are defined.
