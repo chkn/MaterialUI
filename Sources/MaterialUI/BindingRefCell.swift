@@ -9,14 +9,14 @@
 import SwiftUI
 
 class BindingRefCell<T> {
-    public var value: T
+	public var value: T
 
-    public var binding: Binding<T> {
-        Binding<T>(get: { self.value }, set: { self.value = $0 })
-    }
+	public var binding: Binding<T> {
+		Binding<T>(get: { self.value }, set: { self.value = $0 })
+	}
 
-    public init(initialValue: T)
-    {
-        self.value = initialValue
-    }
+	public init(initialValue: T)
+	{
+		self.value = initialValue
+	}
 }

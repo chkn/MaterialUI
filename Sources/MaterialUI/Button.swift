@@ -12,122 +12,122 @@ import SwiftUI
 
 /// A `ViewModifier` that applies to all Material buttons.
 struct MaterialButtonContent: ViewModifier {
-    var xPadding: CGFloat = 16
-    @Environment(\.font) private var font
+	var xPadding: CGFloat = 16
+	@Environment(\.font) private var font
 
-    func body(content: Content) -> some View
-    {
-        content
-            .font((font ?? Font.body).smallCaps())
-            .padding(.leading, xPadding)
-            .padding(.trailing, xPadding)
-            .padding(.top, 8)
-            .padding(.bottom, 8)
-    }
+	func body(content: Content) -> some View
+	{
+		content
+			.font((font ?? Font.body).smallCaps())
+			.padding(.leading, xPadding)
+			.padding(.trailing, xPadding)
+			.padding(.top, 8)
+			.padding(.bottom, 8)
+	}
 }
 
 public struct ContainedButtonStyle: PrimitiveButtonStyle {
-    private struct LabelModifier: ViewModifier {
-        @Environment(\.isEnabled) var isEnabled: Bool
+	private struct LabelModifier: ViewModifier {
+		@Environment(\.isEnabled) var isEnabled: Bool
 
-        func body(content: Content) -> some View
-        {
-            content
-                .modifier(MaterialButtonContent())
-                .rippleEffect(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
-                .foregroundColor(Color.white) // FIXME: should be foregroundColor
-                .background(isEnabled ? Color.accentColor : Color.gray)
-                .cornerRadius(4)
-                .elevation(enabled: 2, hover: 4, mouseDown: 8)
-        }
-    }
+		func body(content: Content) -> some View
+		{
+			content
+				.modifier(MaterialButtonContent())
+				.rippleEffect(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
+				.foregroundColor(Color.white) // FIXME: should be foregroundColor
+				.background(isEnabled ? Color.accentColor : Color.gray)
+				.cornerRadius(4)
+				.elevation(enabled: 2, hover: 4, mouseDown: 8)
+		}
+	}
 
-    public init()
-    {
-    }
+	public init()
+	{
+	}
 
-    public func makeBody(configuration: Self.Configuration) -> some View
-    {
-        configuration
-            .label
-            .modifier(LabelModifier())
-            .modifier(PointerObserver(action: configuration.trigger))
-    }
+	public func makeBody(configuration: Self.Configuration) -> some View
+	{
+		configuration
+			.label
+			.modifier(LabelModifier())
+			.modifier(PointerObserver(action: configuration.trigger))
+	}
 }
 
 public struct OutlinedButtonStyle: PrimitiveButtonStyle {
-    private struct LabelModifier: ViewModifier {
-        @Environment(\.isEnabled) var isEnabled: Bool
+	private struct LabelModifier: ViewModifier {
+		@Environment(\.isEnabled) var isEnabled: Bool
 
-        func body(content: Content) -> some View
-        {
-            content
-                .modifier(MaterialButtonContent())
-                .rippleEffect(Color.accentColor, cornerRadius: 4)
-                .foregroundColor(isEnabled ? Color.accentColor : Color.gray)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(isEnabled ? Color.accentColor : Color.gray)
-                )
-        }
-    }
+		func body(content: Content) -> some View
+		{
+			content
+				.modifier(MaterialButtonContent())
+				.rippleEffect(Color.accentColor, cornerRadius: 4)
+				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+				.overlay(
+					RoundedRectangle(cornerRadius: 4)
+						.stroke(isEnabled ? Color.accentColor : Color.gray)
+				)
+		}
+	}
 
-    public init()
-    {
-    }
+	public init()
+	{
+	}
 
-    public func makeBody(configuration: Self.Configuration) -> some View
-    {
-        configuration
-            .label
-            .modifier(LabelModifier())
-            .modifier(PointerObserver(action: configuration.trigger))
-    }
+	public func makeBody(configuration: Self.Configuration) -> some View
+	{
+		configuration
+			.label
+			.modifier(LabelModifier())
+			.modifier(PointerObserver(action: configuration.trigger))
+	}
 }
 
 public struct TextButtonStyle: PrimitiveButtonStyle {
-    private struct LabelModifier: ViewModifier {
-        @Environment(\.isEnabled) var isEnabled: Bool
+	private struct LabelModifier: ViewModifier {
+		@Environment(\.isEnabled) var isEnabled: Bool
 
-        func body(content: Content) -> some View
-        {
-            content
-                .modifier(MaterialButtonContent(xPadding: 8))
-                .rippleEffect(Color.accentColor, cornerRadius: 4)
-                .foregroundColor(isEnabled ? Color.accentColor : Color.gray)
-        }
-    }
+		func body(content: Content) -> some View
+		{
+			content
+				.modifier(MaterialButtonContent(xPadding: 8))
+				.rippleEffect(Color.accentColor, cornerRadius: 4)
+				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+		}
+	}
 
-    public init()
-    {
-    }
+	public init()
+	{
+	}
 
-    public func makeBody(configuration: Self.Configuration) -> some View
-    {
-        configuration
-            .label
-            .modifier(LabelModifier())
-            .modifier(PointerObserver(action: configuration.trigger))
-    }
+	public func makeBody(configuration: Self.Configuration) -> some View
+	{
+		configuration
+			.label
+			.modifier(LabelModifier())
+			.modifier(PointerObserver(action: configuration.trigger))
+	}
 }
 
 #if DEBUG
 struct Button_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            Button("Button", action: {})
-                .buttonStyle(ContainedButtonStyle())
-                .previewDisplayName("ContainedButtonStyle")
+	static var previews: some View {
+		Group {
+			Button("Button", action: {})
+				.buttonStyle(ContainedButtonStyle())
+				.previewDisplayName("ContainedButtonStyle")
 
-            Button("Button", action: {})
-                .buttonStyle(OutlinedButtonStyle())
-                .previewDisplayName("OutlinedButtonStyle")
+			Button("Button", action: {})
+				.buttonStyle(OutlinedButtonStyle())
+				.previewDisplayName("OutlinedButtonStyle")
 
-            Button("Button", action: {})
-                .buttonStyle(TextButtonStyle())
-                .previewDisplayName("TextButtonStyle")
+			Button("Button", action: {})
+				.buttonStyle(TextButtonStyle())
+				.previewDisplayName("TextButtonStyle")
 
-        }.previewLayout(PreviewLayout.fixed(width: 150, height: 100))
-    }
+		}.previewLayout(PreviewLayout.fixed(width: 150, height: 100))
+	}
 }
 #endif
