@@ -10,12 +10,12 @@ import SwiftUI
 
 fileprivate struct Elevation: ViewModifier {
 	//https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/material/constants.dart#L31
-	let kThemeChangeDuration: Double = 0.2
+	static let kThemeChangeDuration: Double = 0.2
 
 	// See MDCShadowMetrics in
 	//https://github.com/material-components/material-components-ios/blob/develop/components/ShadowLayer/src/MDCShadowLayer.m
-	let kKeyShadowOpacity: Double = 0.26
-	let kAmbientShadowOpacity: Double = 0.08
+	static let kKeyShadowOpacity: Double = 0.26
+	static let kAmbientShadowOpacity: Double = 0.08
 
 	let enabled: CGFloat
 	let disabled: CGFloat
@@ -55,13 +55,13 @@ fileprivate struct Elevation: ViewModifier {
 		content
 			.animation(nil)
 			// top shadow
-			.shadow(color: Color.primary.opacity(kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
+			.shadow(color: Color.primary.opacity(Self.kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
 
 			// key shadow
-			.shadow(color: Color.primary.opacity(kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
+			.shadow(color: Color.primary.opacity(Self.kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
 
 			// FIXME: Is this the correct curve?
-			.animation(isEnabled ? Animation.easeInOut(duration: kThemeChangeDuration) : nil)
+			.animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil)
 			.modifier(PointerObserver(updating: $pointerState))
 	}
 }

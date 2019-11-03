@@ -10,12 +10,12 @@ import SwiftUI
 
 fileprivate struct Ripple: ViewModifier {
 	// https://github.com/material-components/material-components-ios/blob/develop/components/Ripple/src/private/MDCRippleLayer.m
-	let kExpandRippleBeyondSurface: CGFloat = 10
-	let kRippleStartingScale: CGFloat = 0.6
-	let kRippleTouchDownDuration: Double = 0.2
-	//let kRippleTouchUpDuration: Double = 0.15
-	let kRippleFadeInOutDuration: Double = 0.075
-	//let kRippleFadeOutDelay: CGFloat = 0.15
+	static let kExpandRippleBeyondSurface: CGFloat = 10
+	static let kRippleStartingScale: CGFloat = 0.6
+	static let kRippleTouchDownDuration: Double = 0.2
+	//static let kRippleTouchUpDuration: Double = 0.15
+	static let kRippleFadeInOutDuration: Double = 0.075
+	//static let kRippleFadeOutDelay: CGFloat = 0.15
 
 	let color: Color
 	let cornerRadius: CGFloat
@@ -47,13 +47,13 @@ fileprivate struct Ripple: ViewModifier {
 	{
 		let mX = size.width / 2
 		let mY = size.height / 2
-		let diameter = (hypot(mX, mY) + kExpandRippleBeyondSurface) * 2
+		let diameter = (hypot(mX, mY) + Self.kExpandRippleBeyondSurface) * 2
 		return Ellipse()
 			.frame(width: diameter, height: diameter)
 			.fixedSize()
 			.offset(rippleOffset(mX, mY))
-			.scaleEffect(rippleAppeared ? 1 : kRippleStartingScale)
-			.animation(.easeInOut(duration: kRippleTouchDownDuration))
+			.scaleEffect(rippleAppeared ? 1 : Self.kRippleStartingScale)
+			.animation(.easeInOut(duration: Self.kRippleTouchDownDuration))
 	}
 
 	public func body(content: Content) -> some View
@@ -65,13 +65,13 @@ fileprivate struct Ripple: ViewModifier {
 					if isEnabled {
 						RoundedRectangle(cornerRadius: cornerRadius)
 							.fill(color.opacity(pointerState.isOver ? 0.08 : 0))
-							.animation(.linear(duration: kRippleFadeInOutDuration))
+							.animation(.linear(duration: Self.kRippleFadeInOutDuration))
 					}
 					// ripple
 					if showRipple {
 						RoundedRectangle(cornerRadius: cornerRadius)
 							.fill(color.opacity(0.16))
-							.animation(.linear(duration: kRippleFadeInOutDuration))
+							.animation(.linear(duration: Self.kRippleFadeInOutDuration))
 							.mask(GeometryReader { self.rippleShape(for: $0.size) })
 							.onAppear { self.rippleAppeared = true }
 							.onDisappear { self.rippleAppeared = false }
