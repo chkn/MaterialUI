@@ -19,6 +19,16 @@ enum PointerState {
 
 	/// The mouse/finger is pressed
 	case down(at: CGPoint)
+
+	/// Returns `true` if the mouse if hovering or if the mouse/finger is down
+	public var isOver: Bool {
+		switch self {
+		case .none:
+			return false
+		default:
+			return true
+		}
+	}
 }
 
 struct PointerObserver: ViewModifier {
@@ -41,24 +51,24 @@ struct PointerObserver: ViewModifier {
 	{
 		#if HAVE_DRAG
 			let gesture = DragGesture(minimumDistance: 0)
-                .onChanged {
-                    // if self.state != .down
-                    if case .down(_) = self.state {} else {
-                        self.state = .down(at: $0.startLocation)
-                    }
-                }
-                .onEnded {_ in
-                    if case .down(_) = self.state {
-                        #if HAVE_HOVER
-                            self.state = .hover
-                        #else
-                            self.state = .none
-                        #endif
-                        if let fn = self.action {
-                            fn()
-                        }
-                    }
-                }
+				.onChanged {
+					// if self.state != .down
+					if case .down(_) = self.state {} else {
+						self.state = .down(at: $0.startLocation)
+					}
+				}
+				.onEnded {_ in
+					if case .down(_) = self.state {
+						#if HAVE_HOVER
+							self.state = .hover
+						#else
+							self.state = .none
+						#endif
+						if let fn = self.action {
+							fn()
+						}
+					}
+				}
 		#else
 			#error("Figure out how to get these events")
 		#endif
