@@ -34,7 +34,7 @@ public struct ContainedButtonStyle: PrimitiveButtonStyle {
 		{
 			content
 				.modifier(MaterialButtonContent())
-				.rippleEffect(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
+				.ripple(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
 				.foregroundColor(Color.white) // FIXME: should be foregroundColor
 				.background(isEnabled ? Color.accentColor : Color.gray)
 				.cornerRadius(4)
@@ -63,7 +63,7 @@ public struct OutlinedButtonStyle: PrimitiveButtonStyle {
 		{
 			content
 				.modifier(MaterialButtonContent())
-				.rippleEffect(Color.accentColor, cornerRadius: 4)
+				.ripple(Color.accentColor, cornerRadius: 4)
 				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
 				.overlay(
 					RoundedRectangle(cornerRadius: 4)
@@ -93,7 +93,7 @@ public struct TextButtonStyle: PrimitiveButtonStyle {
 		{
 			content
 				.modifier(MaterialButtonContent(xPadding: 8))
-				.rippleEffect(Color.accentColor, cornerRadius: 4)
+				.ripple(Color.accentColor, cornerRadius: 4)
 				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
 		}
 	}
