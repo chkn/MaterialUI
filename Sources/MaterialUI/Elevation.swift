@@ -55,10 +55,10 @@ fileprivate struct Elevation: ViewModifier {
 		content
 			.animation(nil)
 			// top shadow
-			.shadow(color: Color.primary.opacity(Self.kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
+			.shadow(color: Color.black.opacity(Self.kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
 
 			// key shadow
-			.shadow(color: Color.primary.opacity(Self.kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
+			.shadow(color: Color.black.opacity(Self.kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
 
 			// FIXME: Is this the correct curve?
 			.animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil)
