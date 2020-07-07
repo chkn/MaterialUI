@@ -90,7 +90,7 @@ public struct OutlinedButtonStyle: PrimitiveButtonStyle {
 public struct TextButtonStyle: PrimitiveButtonStyle {
 	private struct LabelModifier: ViewModifier {
 		@Environment(\.isEnabled) var isEnabled: Bool
-        @Environment(\.materialAccent) var accentColor: Color
+		@Environment(\.materialAccent) var accentColor: Color
 
 		func body(content: Content) -> some View
 		{
