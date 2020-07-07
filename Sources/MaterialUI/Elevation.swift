@@ -53,7 +53,7 @@ fileprivate struct Elevation: ViewModifier {
 	public func body(content: Content) -> some View
 	{
 		content
-            .animation(nil,value:elevation)
+			.animation(nil, value: elevation)
 			// top shadow
 			.shadow(color: Color.black.opacity(Self.kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
 
