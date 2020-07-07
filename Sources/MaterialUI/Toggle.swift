@@ -41,7 +41,7 @@ public struct MaterialSwitchToggleStyle: ToggleStyle {
 				.fill(configuration.isOn ? Color.accentColor : Color.white)
 				.frame(width: Self.thumbDiameter, height: Self.thumbDiameter)
 				.offset(offset)
-                .animation(anim,value:configuration.isOn)
+				.animation(anim, value: configuration.isOn)
 				.elevation(2)
 			}
 			.modifier(DisabledFader())
