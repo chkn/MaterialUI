@@ -15,6 +15,6 @@ struct DisabledFader: ViewModifier {
 		content
 			.compositingGroup()
 			.opacity(isEnabled ? 1 : 0.5)
-            .animation(nil,value:isEnabled)
+			.animation(nil, value: isEnabled)
 	}
 }
