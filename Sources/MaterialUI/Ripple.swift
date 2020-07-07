@@ -73,7 +73,7 @@ fileprivate struct Ripple: ViewModifier {
 						RoundedRectangle(cornerRadius: cornerRadius)
 							.fill(color.opacity(pointerState.isOver ? 0.08 : 0))
 							.frame(width: dimension, height: dimension)
-                            .animation(.linear(duration: Self.kRippleFadeInOutDuration),value:pointerState.isOver)
+							.animation(.linear(duration: Self.kRippleFadeInOutDuration), value: pointerState.isOver)
 					}
 					// ripple
 					if showRipple {
