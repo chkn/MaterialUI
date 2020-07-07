@@ -60,7 +60,7 @@ fileprivate struct Ripple: ViewModifier {
 			.fixedSize(horizontal: !isRadial, vertical: !isRadial)
 			.offset(rippleOffset(mX, mY))
 			.scaleEffect(rippleAppeared ? 1 : Self.kRippleStartingScale)
-            .animation(.easeInOut(duration: isRadial ? Self.kRadialReactionDuration : Self.kRippleTouchDownDuration),value:rippleAppeared)
+			.animation(.easeInOut(duration: isRadial ? Self.kRadialReactionDuration : Self.kRippleTouchDownDuration), value: rippleAppeared)
 	}
 
 	public func body(content: Content) -> some View
