@@ -61,7 +61,7 @@ fileprivate struct Elevation: ViewModifier {
 			.shadow(color: Color.black.opacity(Self.kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
 
 			// FIXME: Is this the correct curve?
-            .animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil,value:elevation)
+			.animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil, value: elevation)
 			.modifier(PointerObserver(updating: $pointerState))
 	}
 }
