@@ -11,7 +11,7 @@ import SwiftUI
 public struct MaterialSwitchToggleStyle: ToggleStyle {
 	@Environment(\.materialAccent) var accentColor: Color
     
-    // https://github.com/flutter/flutter/blob/ee032f67c734e607d8ea5c870ba744daf4bf56e7/packages/flutter/lib/src/material/switch.dart#L19
+	// https://github.com/flutter/flutter/blob/ee032f67c734e607d8ea5c870ba744daf4bf56e7/packages/flutter/lib/src/material/switch.dart#L19
 	// FIXME: https://material.io/components/selection-controls/#specs says it should be 20 x 36 .. what gives?
 	static let _kTrackHeight: CGFloat = 14.0;
 	static let _kTrackWidth: CGFloat = 33.0;
