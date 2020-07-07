@@ -46,7 +46,7 @@ public struct MaterialSwitchToggleStyle: ToggleStyle {
 			}
 			.modifier(DisabledFader())
 			.radialRipple(configuration.isOn ? Color.accentColor : Color.primary, offset: offset)
-			.animation(anim,value:configuration.isOn)
+			.animation(anim, value: configuration.isOn)
 			.modifier(PointerObserver(action: { configuration.isOn.toggle() }))
 	}
 
