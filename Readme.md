@@ -75,7 +75,7 @@ In iOS and WatchOS, you can set the color through the accentColor modifier
             .accentColor(Color.green)
 ```
 
-In MacOS the accentColor modifier is not available, so you can use the materialColor environment variable
+In MacOS the accentColor modifier is not available, so you can use the materialAccent environment variable
 (in fact, you can use this on any platform)
 
 
