@@ -26,11 +26,9 @@ extension EnvironmentValues {
     var materialAccent: Color {
         get {
             let color = self[MaterialAccentColorKey.self]
-            print("color get: \(color)")
             return color
         }
         set {
-            print("color set: \(newValue)")
             self[MaterialAccentColorKey.self] = newValue
         }
     }
