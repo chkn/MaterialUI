@@ -60,7 +60,7 @@ fileprivate struct Ripple: ViewModifier {
 			.fixedSize(horizontal: !isRadial, vertical: !isRadial)
 			.offset(rippleOffset(mX, mY))
 			.scaleEffect(rippleAppeared ? 1 : Self.kRippleStartingScale)
-			.animation(.easeInOut(duration: isRadial ? Self.kRadialReactionDuration : Self.kRippleTouchDownDuration))
+			.animation(.easeInOut(duration: isRadial ? Self.kRadialReactionDuration : Self.kRippleTouchDownDuration), value: rippleAppeared)
 	}
 
 	public func body(content: Content) -> some View
@@ -73,14 +73,14 @@ fileprivate struct Ripple: ViewModifier {
 						RoundedRectangle(cornerRadius: cornerRadius)
 							.fill(color.opacity(pointerState.isOver ? 0.08 : 0))
 							.frame(width: dimension, height: dimension)
-							.animation(.linear(duration: Self.kRippleFadeInOutDuration))
+							.animation(.linear(duration: Self.kRippleFadeInOutDuration), value: pointerState.isOver)
 					}
 					// ripple
 					if showRipple {
 						RoundedRectangle(cornerRadius: cornerRadius)
 							.fill(color.opacity(0.16))
 							.frame(width: dimension, height: dimension)
-							.animation(.linear(duration: Self.kRippleFadeInOutDuration))
+							.animation(.linear(duration: Self.kRippleFadeInOutDuration), value: pointerState.isOver)
 							.mask(GeometryReader { self.rippleShape(for: $0.size) })
 							.onAppear { self.rippleAppeared = true }
 							.onDisappear { self.rippleAppeared = false }

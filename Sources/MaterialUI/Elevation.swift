@@ -53,7 +53,7 @@ fileprivate struct Elevation: ViewModifier {
 	public func body(content: Content) -> some View
 	{
 		content
-			.animation(nil)
+			.animation(nil, value: elevation)
 			// top shadow
 			.shadow(color: Color.black.opacity(Self.kAmbientShadowOpacity), radius: ambientShadowBlur, x: 0, y: 0)
 
@@ -61,7 +61,7 @@ fileprivate struct Elevation: ViewModifier {
 			.shadow(color: Color.black.opacity(Self.kKeyShadowOpacity), radius: keyShadowBlur, x: 0, y: keyShadowYOff)
 
 			// FIXME: Is this the correct curve?
-			.animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil)
+			.animation(isEnabled ? Animation.easeInOut(duration: Self.kThemeChangeDuration) : nil, value: elevation)
 			.modifier(PointerObserver(updating: $pointerState))
 	}
 }
