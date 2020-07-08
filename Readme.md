@@ -65,6 +65,26 @@ Button("Text Button", action: {})
 
 ![Text Button](docs/img/TextButton.gif)
 
+#### Color
+
+In iOS and WatchOS, you can set the color through the accentColor modifier
+
+```swift
+        Button("Contained Button", action: {})
+        .buttonStyle(ContainedButtonStyle())
+            .accentColor(Color.green)
+```
+
+In MacOS the accentColor modifier is not available, so you can use the materialAccent environment variable
+(in fact, you can use this on any platform)
+
+
+```swift
+        Button("Contained Button", action: {})
+        .buttonStyle(ContainedButtonStyle())
+        .environment(\.materialAccent, Color.red)
+```
+
 #### Modifiers
 
 MaterialUI also supplies some modifiers you can apply to any SwiftUI View:
