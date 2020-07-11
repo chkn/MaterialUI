@@ -9,7 +9,9 @@
 import SwiftUI
 
 public struct MaterialSwitchToggleStyle: ToggleStyle {
-	// https://github.com/flutter/flutter/blob/ee032f67c734e607d8ea5c870ba744daf4bf56e7/packages/flutter/lib/src/material/switch.dart#L19
+	@Environment(\.materialAccent) var accentColor: Color
+    
+    // https://github.com/flutter/flutter/blob/ee032f67c734e607d8ea5c870ba744daf4bf56e7/packages/flutter/lib/src/material/switch.dart#L19
 	// FIXME: https://material.io/components/selection-controls/#specs says it should be 20 x 36 .. what gives?
 	static let _kTrackHeight: CGFloat = 14.0;
 	static let _kTrackWidth: CGFloat = 33.0;
@@ -33,19 +35,19 @@ public struct MaterialSwitchToggleStyle: ToggleStyle {
 		return ZStack {
 			// track
 			RoundedRectangle(cornerRadius: Self._kTrackRadius)
-				.fill((configuration.isOn ? Color.accentColor : Color.gray).opacity(0.54))
+				.fill((configuration.isOn ? accentColor : Color.gray).opacity(0.54))
 				.frame(width: Self._kTrackWidth, height: Self._kTrackHeight)
 
 			// thumb
 			Circle()
-				.fill(configuration.isOn ? Color.accentColor : Color.white)
+				.fill(configuration.isOn ? accentColor : Color.white)
 				.frame(width: Self.thumbDiameter, height: Self.thumbDiameter)
 				.offset(offset)
 				.animation(anim)
 				.elevation(2)
 			}
 			.modifier(DisabledFader())
-			.radialRipple(configuration.isOn ? Color.accentColor : Color.primary, offset: offset)
+			.radialRipple(configuration.isOn ? accentColor : Color.primary, offset: offset)
 			.animation(anim)
 			.modifier(PointerObserver(action: { configuration.isOn.toggle() }))
 	}

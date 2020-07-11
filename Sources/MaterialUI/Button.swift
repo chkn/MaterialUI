@@ -29,6 +29,7 @@ struct MaterialButtonContent: ViewModifier {
 public struct ContainedButtonStyle: PrimitiveButtonStyle {
 	private struct LabelModifier: ViewModifier {
 		@Environment(\.isEnabled) var isEnabled: Bool
+        @Environment(\.materialAccent) var accentColor: Color
 
 		func body(content: Content) -> some View
 		{
@@ -36,7 +37,7 @@ public struct ContainedButtonStyle: PrimitiveButtonStyle {
 				.modifier(MaterialButtonContent())
 				.ripple(Color.white, cornerRadius: 4) // FIXME: should be foregroundColor
 				.foregroundColor(Color.white) // FIXME: should be foregroundColor
-				.background(isEnabled ? Color.accentColor : Color.gray)
+				.background(isEnabled ? accentColor : Color.gray)
 				.cornerRadius(4)
 				.elevation(enabled: 2, hover: 4, mouseDown: 8)
 		}
@@ -58,16 +59,17 @@ public struct ContainedButtonStyle: PrimitiveButtonStyle {
 public struct OutlinedButtonStyle: PrimitiveButtonStyle {
 	private struct LabelModifier: ViewModifier {
 		@Environment(\.isEnabled) var isEnabled: Bool
+        @Environment(\.materialAccent) var accentColor: Color
 
 		func body(content: Content) -> some View
 		{
 			content
 				.modifier(MaterialButtonContent())
-				.ripple(Color.accentColor, cornerRadius: 4)
-				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+				.ripple(accentColor, cornerRadius: 4)
+				.foregroundColor(isEnabled ? accentColor : Color.gray)
 				.overlay(
 					RoundedRectangle(cornerRadius: 4)
-						.stroke(isEnabled ? Color.accentColor : Color.gray)
+						.stroke(isEnabled ? accentColor : Color.gray)
 				)
 		}
 	}
@@ -88,13 +90,14 @@ public struct OutlinedButtonStyle: PrimitiveButtonStyle {
 public struct TextButtonStyle: PrimitiveButtonStyle {
 	private struct LabelModifier: ViewModifier {
 		@Environment(\.isEnabled) var isEnabled: Bool
+        @Environment(\.materialAccent) var accentColor: Color
 
 		func body(content: Content) -> some View
 		{
 			content
 				.modifier(MaterialButtonContent(xPadding: 8))
-				.ripple(Color.accentColor, cornerRadius: 4)
-				.foregroundColor(isEnabled ? Color.accentColor : Color.gray)
+				.ripple(accentColor, cornerRadius: 4)
+				.foregroundColor(isEnabled ? accentColor : Color.gray)
 		}
 	}
 
