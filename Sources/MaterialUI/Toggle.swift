@@ -41,12 +41,12 @@ public struct MaterialSwitchToggleStyle: ToggleStyle {
 				.fill(configuration.isOn ? Color.accentColor : Color.white)
 				.frame(width: Self.thumbDiameter, height: Self.thumbDiameter)
 				.offset(offset)
-				.animation(anim)
+                .animation(anim,value:configuration.isOn)
 				.elevation(2)
 			}
 			.modifier(DisabledFader())
 			.radialRipple(configuration.isOn ? Color.accentColor : Color.primary, offset: offset)
-			.animation(anim)
+			.animation(anim,value:configuration.isOn)
 			.modifier(PointerObserver(action: { configuration.isOn.toggle() }))
 	}
 
